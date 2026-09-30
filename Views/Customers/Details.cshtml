@@ -1,0 +1,67 @@
+@model CarDealerSystem.Models.Entities.Customer
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Customers</div>
+        <h2>@Model.FullName</h2>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <i data-lucide="pencil"></i>
+        Edit
+    </a>
+</div>
+
+<div class="panel-card">
+
+    <div class="panel-header">
+
+        <div class="panel-icon-badge">
+            <i data-lucide="users"></i>
+        </div>
+
+        <div>
+            <h3 class="mb-1">@Model.FullName</h3>
+        </div>
+
+    </div>
+
+    <div class="definition-grid">
+
+        <div class="definition-row">
+            <span class="definition-label">Full Name</span>
+            <span class="definition-value">@Model.FullName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Phone</span>
+            <span class="definition-value">@Model.Phone</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Email</span>
+            <span class="definition-value">@Model.Email</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Address</span>
+            <span class="definition-value">@Model.Address</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">National ID</span>
+            <span class="definition-value">@Model.NationalId</span>
+        </div>
+
+    </div>
+
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    <i data-lucide="arrow-left"></i>
+    Back
+</a>

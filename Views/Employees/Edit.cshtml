@@ -1,0 +1,92 @@
+@model CarDealerSystem.Models.ViewModels.EditEmployeeViewModel
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Employees</div>
+        <h2>Edit Employee</h2>
+    </div>
+</div>
+
+<form asp-action="Edit" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="id-card"></i>
+            Employee Details
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Phone" class="form-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Salary" class="form-label"></label>
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="HireDate" class="form-label"></label>
+                <input asp-for="HireDate" type="date" class="form-control" />
+                <span asp-validation-for="HireDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="BranchId" class="form-label"></label>
+
+                <select asp-for="BranchId"
+                        asp-items="ViewBag.Branches"
+                        class="form-select">
+                    <option value="">-- Select Branch --</option>
+                </select>
+
+                <span asp-validation-for="BranchId" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-footer">
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            Back
+        </a>
+
+        <button type="submit" class="btn btn-success">
+            <i data-lucide="check-circle"></i>
+            Update Employee
+        </button>
+
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

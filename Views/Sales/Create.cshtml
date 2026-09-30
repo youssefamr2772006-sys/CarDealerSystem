@@ -1,0 +1,92 @@
+@model CarDealerSystem.Models.Entities.Sale
+
+@{
+    ViewData["Title"] = "New Sale";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Sales</div>
+        <h2>New Sale</h2>
+    </div>
+</div>
+
+<form asp-action="Create" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="receipt-text"></i>
+            Sale Details
+        </div>
+
+        <div class="row">
+
+            <div class="mb-3">
+                <label asp-for="CarId" class="form-label">Car</label>
+
+                <select asp-for="CarId"
+                        asp-items="ViewBag.Cars"
+                        class="form-select">
+                    <option value="">-- Select Car --</option>
+                </select>
+
+                <span asp-validation-for="CarId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CustomerId" class="form-label">Customer</label>
+
+                <select asp-for="CustomerId"
+                        asp-items="ViewBag.Customers"
+                        class="form-select">
+                    <option value="">-- Select Customer --</option>
+                </select>
+
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="EmployeeId" class="form-label">Employee</label>
+
+                <select asp-for="EmployeeId"
+                        asp-items="ViewBag.Employees"
+                        class="form-select">
+                    <option value="">-- Select Employee --</option>
+                </select>
+
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SalePrice" class="form-label"></label>
+
+                <input asp-for="SalePrice" class="form-control" />
+
+                <span asp-validation-for="SalePrice" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-footer">
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            Back
+        </a>
+
+        <button type="submit" class="btn btn-success">
+            <i data-lucide="check-circle"></i>
+            Save Sale
+        </button>
+
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

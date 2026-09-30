@@ -1,0 +1,72 @@
+@model CarDealerSystem.Models.Entities.Employee
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Employees</div>
+        <h2>@Model.ApplicationUser?.FullName</h2>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <i data-lucide="pencil"></i>
+        Edit
+    </a>
+</div>
+
+<div class="panel-card">
+
+    <div class="panel-header">
+
+        <div class="panel-icon-badge">
+            <i data-lucide="id-card"></i>
+        </div>
+
+        <div>
+            <h3 class="mb-1">@Model.ApplicationUser?.FullName</h3>
+        </div>
+
+    </div>
+
+    <div class="definition-grid">
+
+        <div class="definition-row">
+            <span class="definition-label">Name</span>
+            <span class="definition-value">@Model.ApplicationUser?.FullName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Email</span>
+            <span class="definition-value">@Model.ApplicationUser?.Email</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Phone</span>
+            <span class="definition-value">@Model.ApplicationUser?.PhoneNumber</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Salary</span>
+            <span class="definition-value fw-semibold">@Model.Salary.ToString("C")</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Hire Date</span>
+            <span class="definition-value">@Model.HireDate.ToShortDateString()</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Branch</span>
+            <span class="definition-value">@Model.Branch?.Name</span>
+        </div>
+
+    </div>
+
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    <i data-lucide="arrow-left"></i>
+    Back
+</a>

@@ -1,0 +1,87 @@
+@model CarDealerSystem.Models.Entities.Sale
+
+@{
+    ViewData["Title"] = "Sale Details";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Sales</div>
+        <h2>Sale Details</h2>
+    </div>
+
+    @if (User.IsInRole("Manager"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+            <i data-lucide="pencil"></i>
+            Edit
+        </a>
+    }
+</div>
+
+<div class="panel-card">
+    <div class="panel-header">
+        <div class="panel-icon-badge">
+            <i data-lucide="receipt-text"></i>
+        </div>
+        <div>
+            <h3 class="mb-1">@Model.Car?.Brand @Model.Car?.Model</h3>
+        </div>
+    </div>
+    <div class="definition-grid">
+
+        <div class="definition-row">
+            <span class="definition-label">Car</span>
+            <span class="definition-value">@Model.Car?.Brand @Model.Car?.Model</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Customer</span>
+            <span class="definition-value">@Model.Customer?.FullName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Employee</span>
+            <span class="definition-value">@Model.Employee?.ApplicationUser?.FullName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Sale Date</span>
+            <span class="definition-value">@Model.SaleDate.ToShortDateString()</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Sale Price</span>
+            <span class="definition-value">@Model.SalePrice.ToString("C")</span>
+        </div>
+
+        @if (Model.Payment != null)
+        {
+            <div class="definition-row">
+                <span class="definition-label">Payment Amount</span>
+                <span class="definition-value">@Model.Payment.Amount.ToString("C")</span>
+            </div>
+
+            <div class="definition-row">
+                <span class="definition-label">Payment Method</span>
+                <span class="definition-value">@Model.Payment.PaymentMethod</span>
+            </div>
+
+            <div class="definition-row">
+                <span class="definition-label">Payment Date</span>
+                <span class="definition-value">@Model.Payment.PaymentDate.ToShortDateString()</span>
+            </div>
+
+            <div class="definition-row">
+                <span class="definition-label">Payment Status</span>
+                <span class="definition-value"><partial name="_StatusBadge" model="@Model.Payment.Status" /></span>
+            </div>
+        }
+
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    <i data-lucide="arrow-left"></i>
+    Back
+</a>

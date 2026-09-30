@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>@ViewData["Title"] - Car Dealer System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+</head>
+
+<body class="@(User.Identity!.IsAuthenticated ? "" : "no-sidebar")">
+
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+
+        string NavClass(string controller) =>
+            "nav-item" + (controller == currentController ? " active" : "");
+
+        var currentUserForInitials = User.Identity!.IsAuthenticated ? User.Identity!.Name : null;
+    }
+
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <div class="sidebar-backdrop"></div>
+
+        <aside class="sidebar">
+
+            <a class="sidebar-brand" asp-controller="Home" asp-action="Index" title="Car Dealer">
+                <i data-lucide="car"></i>
+                <span class="nav-label">Car Dealer</span>
+            </a>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-group-label">General</div>
+
+                <a class="@NavClass("Home")" asp-controller="Home" asp-action="Index" title="Dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+
+                <div class="sidebar-group-label">Operations</div>
+
+                <a class="@NavClass("Cars")" asp-controller="Cars" asp-action="Index" title="Inventory">
+                    <i data-lucide="car"></i>
+                    <span class="nav-label">Inventory</span>
+                </a>
+
+                <a class="@NavClass("Sales")" asp-controller="Sales" asp-action="Index" title="Sales">
+                    <i data-lucide="receipt-text"></i>
+                    <span class="nav-label">Sales</span>
+                </a>
+
+                <a class="@NavClass("Purchases")" asp-controller="Purchases" asp-action="Index" title="Purchases">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="nav-label">Purchases</span>
+                </a>
+
+                <a class="@NavClass("Services")" asp-controller="Services" asp-action="Index" title="Services">
+                    <i data-lucide="wrench"></i>
+                    <span class="nav-label">Services</span>
+                </a>
+
+                <div class="sidebar-group-label">Directory</div>
+
+                <a class="@NavClass("Customers")" asp-controller="Customers" asp-action="Index" title="Customers">
+                    <i data-lucide="users"></i>
+                    <span class="nav-label">Customers</span>
+                </a>
+
+                @if (User.IsInRole("Manager"))
+                {
+                    <a class="@NavClass("Suppliers")" asp-controller="Suppliers" asp-action="Index" title="Suppliers">
+                        <i data-lucide="truck"></i>
+                        <span class="nav-label">Suppliers</span>
+                    </a>
+
+                    <a class="@NavClass("Employees")" asp-controller="Employees" asp-action="Index" title="Employees">
+                        <i data-lucide="id-card"></i>
+                        <span class="nav-label">Employees</span>
+                    </a>
+
+                    <a class="@NavClass("Branches")" asp-controller="Branches" asp-action="Index" title="Branches">
+                        <i data-lucide="building-2"></i>
+                        <span class="nav-label">Branches</span>
+                    </a>
+                }
+
+            </nav>
+
+        </aside>
+    }
+
+    <header class="topbar">
+
+        <div class="d-flex align-items-center gap-3">
+
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <button class="sidebar-toggle" type="button" aria-label="Toggle navigation">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="topbar-search">
+                    <i data-lucide="search"></i>
+                    <input type="search"
+                           id="globalCarSearch"
+                           placeholder="Search vehicles by brand, model, VIN or color"
+                           autocomplete="off" />
+                    <div class="search-results" id="globalCarSearchResults"></div>
+                </div>
+            }
+
+        </div>
+
+        <div class="topbar-actions">
+
+            <partial name="_LoginPartial" />
+
+        </div>
+
+    </header>
+
+    <main class="main-content">
+
+        @RenderBody()
+
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

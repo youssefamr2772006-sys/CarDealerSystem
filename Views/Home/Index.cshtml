@@ -1,0 +1,75 @@
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <h2>Dashboard</h2>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-navy">
+                <i data-lucide="car"></i>
+            </div>
+            <div class="metric-label">Total Cars</div>
+            <p class="metric-value">@Model.CarsCount</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-info">
+                <i data-lucide="users"></i>
+            </div>
+            <div class="metric-label">Customers</div>
+            <p class="metric-value">@Model.CustomersCount</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-navy">
+                <i data-lucide="id-card"></i>
+            </div>
+            <div class="metric-label">Employees</div>
+            <p class="metric-value">@Model.EmployeesCount</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-warning">
+                <i data-lucide="truck"></i>
+            </div>
+            <div class="metric-label">Suppliers</div>
+            <p class="metric-value">@Model.SuppliersCount</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-success">
+                <i data-lucide="receipt-text"></i>
+            </div>
+            <div class="metric-label">Sales</div>
+            <p class="metric-value">@Model.SalesCount</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="metric-card">
+            <div class="metric-icon-badge tint-gold">
+                <i data-lucide="trending-up"></i>
+            </div>
+            <div class="metric-label">Total Revenue</div>
+            <p class="metric-value">@Model.TotalRevenue.ToString("C")</p>
+        </div>
+    </div>
+
+</div>

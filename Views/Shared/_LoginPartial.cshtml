@@ -1,0 +1,46 @@
+@using CarDealerSystem.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var fullName = currentUser?.FullName ?? "User";
+
+    var initials = string.Join("", fullName
+        .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+        .Take(2)
+        .Select(p => char.ToUpper(p[0])));
+
+    <div class="user-menu">
+
+        <div class="user-avatar">@initials</div>
+
+        <div class="d-none d-md-block">
+            <div class="user-menu-name">@fullName</div>
+            <div class="user-menu-role">@(User.IsInRole("Manager") ? "Manager" : "Employee")</div>
+        </div>
+
+    </div>
+
+    <a asp-controller="Account" asp-action="Logout" class="logout-link" title="Logout" aria-label="Logout">
+        <i data-lucide="log-out"></i>
+        <span class="d-none d-md-inline">Logout</span>
+    </a>
+}
+else
+{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var isOnLoginPage = currentController == "Account" && currentAction == "Login";
+
+    if (!isOnLoginPage)
+    {
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary-gold btn-sm">
+            <i data-lucide="log-in"></i>
+            Login
+        </a>
+    }
+}

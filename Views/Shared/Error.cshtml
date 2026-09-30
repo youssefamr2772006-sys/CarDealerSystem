@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="text-center mt-5">
+
+    <i data-lucide="triangle-alert" style="width: 64px; height: 64px; color: var(--danger);"></i>
+
+    <h1 class="text-danger mt-3">
+        Something went wrong
+    </h1>
+
+    <p class="lead">
+        An unexpected error occurred while processing your request.
+    </p>
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-primary">
+
+        <i data-lucide="layout-dashboard"></i>
+
+        Back to Dashboard
+
+    </a>
+
+</div>

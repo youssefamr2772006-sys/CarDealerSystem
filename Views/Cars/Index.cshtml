@@ -1,0 +1,103 @@
+@model IEnumerable<CarDealerSystem.Models.Entities.Car>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<div class="page-header">
+
+    <div class="page-title-group">
+        <div class="page-eyebrow">@Model.Count() vehicles in stock</div>
+        <h2>Vehicle Inventory</h2>
+    </div>
+
+    <a asp-action="Create" class="btn btn-success">
+        <i data-lucide="plus"></i>
+        Add Vehicle
+    </a>
+
+</div>
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th class="text-end">Price</th>
+                <th class="text-center">Status</th>
+                <th>Branch</th>
+                <th>Supplier</th>
+                <th width="140" class="text-center">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td class="fw-semibold">@item.Brand</td>
+
+                    <td>@item.Model</td>
+
+                    <td>@item.Year</td>
+
+                    <td class="num">@item.Price.ToString("C")</td>
+
+                    <td class="text-center">
+                        <partial name="_StatusBadge" model="@item.Status" />
+                    </td>
+
+                    <td>@item.Branch?.Name</td>
+
+                    <td>@item.Supplier?.CompanyName</td>
+
+                    <td>
+
+                        <div class="row-actions">
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-ghost btn-icon"
+                               title="View" aria-label="View">
+                                <i data-lucide="eye"></i>
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-ghost btn-icon"
+                               title="Edit" aria-label="Edit">
+                                <i data-lucide="pencil"></i>
+                            </a>
+
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger-ghost btn-icon"
+                                   title="Delete" aria-label="Delete">
+                                    <i data-lucide="trash-2"></i>
+                                </a>
+                            }
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

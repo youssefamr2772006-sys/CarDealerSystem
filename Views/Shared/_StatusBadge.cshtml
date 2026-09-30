@@ -1,0 +1,20 @@
+@model string
+
+@{
+    var status = Model ?? "";
+
+    var css = status.Trim().ToLowerInvariant() switch
+    {
+        "available"                         => "badge--available",
+        "reserved"                           => "badge--reserved",
+        "in preparation" or "inpreparation"  => "badge--prep",
+        "sold"                               => "badge--sold",
+        "archived"                           => "badge--archived",
+        "paid"                               => "badge--success",
+        "partial" or "partially paid"        => "badge--warning",
+        "unpaid" or "pending"                => "badge--danger",
+        _                                    => "badge--archived",
+    };
+}
+
+<span class="badge @css">@status</span>

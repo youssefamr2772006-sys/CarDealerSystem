@@ -1,0 +1,67 @@
+@model CarDealerSystem.Models.Entities.Purchase
+
+@{
+    ViewData["Title"] = "Purchase Details";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Purchases</div>
+        <h2>Purchase Details</h2>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <i data-lucide="pencil"></i>
+        Edit
+    </a>
+</div>
+
+<div class="panel-card">
+
+    <div class="panel-header">
+
+        <div class="panel-icon-badge">
+            <i data-lucide="shopping-bag"></i>
+        </div>
+
+        <div>
+            <h3 class="mb-1">@Model.Car?.Brand @Model.Car?.Model</h3>
+        </div>
+
+    </div>
+
+    <div class="definition-grid">
+
+        <div class="definition-row">
+            <span class="definition-label">Car</span>
+            <span class="definition-value">@Model.Car?.Brand @Model.Car?.Model</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Supplier</span>
+            <span class="definition-value">@Model.Supplier?.CompanyName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Employee</span>
+            <span class="definition-value">@Model.Employee?.ApplicationUser?.FullName</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Purchase Date</span>
+            <span class="definition-value">@Model.PurchaseDate.ToShortDateString()</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Purchase Price</span>
+            <span class="definition-value fw-semibold">@Model.PurchasePrice.ToString("C")</span>
+        </div>
+
+    </div>
+
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    <i data-lucide="arrow-left"></i>
+    Back
+</a>

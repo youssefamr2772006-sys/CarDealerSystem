@@ -1,0 +1,138 @@
+@model CarDealerSystem.Models.Entities.Car
+
+@{
+    ViewData["Title"] = "Car Details";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Vehicle Inventory</div>
+        <h2>@Model.Brand @Model.Model</h2>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <i data-lucide="pencil"></i>
+        Edit
+    </a>
+</div>
+
+<div class="panel-card">
+
+    <div class="panel-header">
+
+        <div class="panel-icon-badge">
+            <i data-lucide="car"></i>
+        </div>
+
+        <div>
+            <h3 class="mb-1">@Model.Brand @Model.Model · @Model.Year</h3>
+            <span class="mono" style="font-size: var(--fs-helper); color: var(--text-muted);">@Model.VIN</span>
+        </div>
+
+        <div class="ms-auto">
+            <partial name="_StatusBadge" model="@Model.Status" />
+        </div>
+
+    </div>
+
+    <div class="definition-grid">
+
+        <div class="definition-row">
+            <span class="definition-label">Price</span>
+            <span class="definition-value fw-semibold">@Model.Price.ToString("C")</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Color</span>
+            <span class="definition-value">@Model.Color</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Mileage</span>
+            <span class="definition-value">@Model.Mileage.ToString("N0") km</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Fuel Type</span>
+            <span class="definition-value">@Model.FuelType</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Transmission</span>
+            <span class="definition-value">@Model.Transmission</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">VIN</span>
+            <span class="definition-value mono">@Model.VIN</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Branch</span>
+            <span class="definition-value">@Model.Branch?.Name</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Supplier</span>
+            <span class="definition-value">@Model.Supplier?.CompanyName</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="panel-card mt-4">
+
+    <div class="panel-header">
+        <div class="panel-icon-badge">
+            <i data-lucide="image"></i>
+        </div>
+        <div>
+            <h3 class="mb-1">Photos</h3>
+        </div>
+    </div>
+
+    @if (Model.Images != null && Model.Images.Any())
+    {
+        <div class="gallery-grid">
+            @foreach (var img in Model.Images)
+            {
+                <div class="gallery-thumb" data-full="@img.ImageUrl">
+                    <img src="@img.ImageUrl" alt="@Model.Brand @Model.Model" />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="gallery-empty">
+            <i data-lucide="image-off"></i>
+            <h3 class="mb-1">No photos yet</h3>
+            <p class="mb-0" style="font-size: var(--fs-helper);">
+                <text>Add photos from the </text>
+                <a asp-action="Edit" asp-route-id="@Model.Id">edit page</a>
+                <text> to build this vehicle's album.</text>
+            </p>
+        </div>
+    }
+
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">
+    <i data-lucide="arrow-left"></i>
+    Back
+</a>
+
+<div class="lightbox-overlay">
+    <button type="button" class="lightbox-close" aria-label="Close">
+        <i data-lucide="x"></i>
+    </button>
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">
+        <i data-lucide="chevron-left"></i>
+    </button>
+    <img class="lightbox-image" src="" alt="Vehicle photo" />
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">
+        <i data-lucide="chevron-right"></i>
+    </button>
+    <div class="lightbox-counter"></div>
+</div>

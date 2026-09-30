@@ -1,0 +1,173 @@
+@model CarDealerSystem.Models.Entities.Car
+
+@{
+    ViewData["Title"] = "Add Car";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Vehicle Inventory</div>
+        <h2>Add New Vehicle</h2>
+    </div>
+</div>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="hash"></i>
+            Identification
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Brand" class="form-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Model" class="form-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Year" class="form-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="VIN" class="form-label"></label>
+                <input asp-for="VIN" class="form-control mono" style="text-transform: uppercase;" maxlength="17" />
+                <span asp-validation-for="VIN" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="settings-2"></i>
+            Specifications
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="Color" class="form-label"></label>
+                <select asp-for="Color" asp-items="ViewBag.Colors" class="form-select">
+                    <option value="">-- Select Color --</option>
+                </select>
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="Mileage" class="form-label"></label>
+                <input asp-for="Mileage" class="form-control" />
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="FuelType" class="form-label"></label>
+                <select asp-for="FuelType" asp-items="ViewBag.FuelTypes" class="form-select">
+                    <option value="">-- Select Fuel Type --</option>
+                </select>
+                <span asp-validation-for="FuelType" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="Transmission" class="form-label"></label>
+                <select asp-for="Transmission" asp-items="ViewBag.Transmissions" class="form-select">
+                    <option value="">-- Select Transmission --</option>
+                </select>
+                <span asp-validation-for="Transmission" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="trending-up"></i>
+            Commercial
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="BranchId" class="form-label">Branch</label>
+                <select asp-for="BranchId"
+                        asp-items="ViewBag.Branches"
+                        class="form-select">
+                    <option value="">-- Select Branch --</option>
+                </select>
+                <span asp-validation-for="BranchId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="SupplierId" class="form-label">Supplier</label>
+                <select asp-for="SupplierId"
+                        asp-items="ViewBag.Suppliers"
+                        class="form-select">
+                    <option value="">-- Select Supplier --</option>
+                </select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="form-section-title">
+            <i data-lucide="image"></i>
+            Photos
+        </div>
+
+        <label class="file-drop" for="carImages">
+            <i data-lucide="upload" class="file-drop-icon"></i>
+            <span class="file-drop-title">Click to upload photos</span>
+            <span class="file-drop-hint">JPG, PNG or WEBP · up to 5 MB each · up to 12 images</span>
+        </label>
+
+        <input type="file"
+               id="carImages"
+               name="Images"
+               multiple
+               accept="image/jpeg,image/png,image/webp"
+               class="visually-hidden-file"
+               data-preview-target="carImagesPreview" />
+
+        <div id="carImagesPreview" class="image-preview-grid"></div>
+    </div>
+
+    <div class="form-footer">
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            Back
+        </a>
+
+        <button type="submit" class="btn btn-success">
+            <i data-lucide="check-circle"></i>
+            Save Vehicle
+        </button>
+
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

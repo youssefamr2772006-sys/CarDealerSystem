@@ -1,0 +1,85 @@
+@model CarDealerSystem.Models.Entities.Car
+
+@{
+    ViewData["Title"] = "Delete Car";
+}
+
+<div class="page-header">
+    <div class="page-title-group">
+        <div class="page-eyebrow">Vehicle Inventory</div>
+        <h2>Delete Vehicle</h2>
+    </div>
+</div>
+
+<div class="panel-card">
+
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="metric-icon-badge tint-danger mb-0">
+            <i data-lucide="triangle-alert"></i>
+        </div>
+        <div>
+            <h3 class="mb-1">Delete this vehicle?</h3>
+            <span style="font-size: var(--fs-helper); color: var(--text-muted);">
+                This action is permanent and cannot be undone.
+            </span>
+        </div>
+    </div>
+
+    <div class="definition-grid mb-4">
+
+        <div class="definition-row">
+            <span class="definition-label">Brand</span>
+            <span class="definition-value">@Model.Brand</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Model</span>
+            <span class="definition-value">@Model.Model</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Year</span>
+            <span class="definition-value">@Model.Year</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Price</span>
+            <span class="definition-value">@Model.Price.ToString("C")</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Status</span>
+            <span class="definition-value"><partial name="_StatusBadge" model="@Model.Status" /></span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Branch</span>
+            <span class="definition-value">@Model.Branch?.Name</span>
+        </div>
+
+        <div class="definition-row">
+            <span class="definition-label">Supplier</span>
+            <span class="definition-value">@Model.Supplier?.CompanyName</span>
+        </div>
+
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <form asp-action="Delete" method="post" class="form-footer justify-content-start">
+
+        <input asp-for="Id" type="hidden" />
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            Cancel
+        </a>
+
+        <button type="submit" class="btn btn-danger">
+            <i data-lucide="trash-2"></i>
+            Delete Vehicle
+        </button>
+
+    </form>
+
+</div>

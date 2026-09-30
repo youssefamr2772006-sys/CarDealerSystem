@@ -1,0 +1,100 @@
+@model IEnumerable<CarDealerSystem.Models.Entities.Service>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div class="page-header">
+
+    <div class="page-title-group">
+        <div class="page-eyebrow">@Model.Count() service records</div>
+        <h2>Services</h2>
+    </div>
+
+    <a asp-action="Create" class="btn btn-success">
+        <i data-lucide="plus"></i>
+        New Service
+    </a>
+
+</div>
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Car</th>
+                <th>Employee</th>
+                <th>Description</th>
+                <th class="text-end">Cost</th>
+                <th>Date</th>
+                <th width="140" class="text-center">Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @item.Car?.Brand @item.Car?.Model
+                    </td>
+
+                    <td>
+                        @item.Employee?.ApplicationUser?.FullName
+                    </td>
+
+                    <td>
+                        @item.Description
+                    </td>
+
+                    <td class="num">
+                        @item.Cost.ToString("C")
+                    </td>
+
+                    <td>
+                        @item.ServiceDate.ToShortDateString()
+                    </td>
+
+                    <td class="text-center">
+
+                        <div class="row-actions">
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-ghost btn-icon"
+                               title="View" aria-label="View">
+                                <i data-lucide="eye"></i>
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-ghost btn-icon"
+                               title="Edit" aria-label="Edit">
+                                <i data-lucide="pencil"></i>
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-danger-ghost btn-icon"
+                               title="Delete" aria-label="Delete">
+                                <i data-lucide="trash-2"></i>
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
